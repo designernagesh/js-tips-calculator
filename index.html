@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Countdown Timer</title>  
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Saira+Extra+Condensed:wght@700;800;900&display=swap">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div style="height: 90vh" class="d-flex mt-4 justify-content-center align-items-center">
+  <div class="container">
+    <h1 class="display-3 text-danger my-4">Countdown New Year Time</h1>    
+
+    <div id="timePlaceholder"></div>
+    
+  <script>
+    const countDown = () => {
+      let remainingDays, remainingHours, remainingMinutes, remainingSeconds, eventTime, currentTime, differenceTime;
+
+      eventTime = new Date('December 31, 2020 11:59:59').getTime();      
+
+      currentTime = new Date().getTime();      
+
+      differenceTime = eventTime - currentTime;      
+
+      remainingDays = Math.floor(differenceTime / (1000 * 60 * 60 * 24));      
+
+      remainingHours = Math.floor((differenceTime % (1000 * 60 * 60 * 24)) / ( 1000 * 60 * 60 ));      
+
+      remainingMinutes = Math.floor((differenceTime % (1000 * 60 * 60)) / ( 1000 * 60 ));      
+
+      remainingSeconds = Math.floor((differenceTime % (1000 * 60)) / 1000);
+
+      return document.getElementById('timePlaceholder').innerHTML = 
+        `<div class="card-deck mb-4">
+          <div class="card">        
+            <div class="card-body">
+              <h1 class="card-title">${remainingDays}</h1>
+              <p class="card-text">Days</p>          
+            </div>
+          </div>
+
+          <div class="card">        
+            <div class="card-body">
+              <h1 class="card-title">${remainingHours < 10 ? '0' + remainingHours : remainingHours}</h1>
+              <p class="card-text">Hours</p>          
+            </div>
+          </div>
+
+          <div class="card">        
+            <div class="card-body">
+              <h1 class="card-title">${remainingMinutes < 10 ? '0' + remainingMinutes : remainingMinutes}</h1>
+              <p class="card-text">Minutes</p>          
+            </div>
+          </div>
+
+          <div class="card">        
+            <div class="card-body">
+              <h1 class="card-title">${remainingSeconds < 10 ? '0' + remainingSeconds : remainingSeconds}</h1>
+              <p class="card-text">Seconds</p>          
+            </div>
+          </div>
+        </div>        
+        `
+    }
+
+    setInterval(countDown, 1000);
+  </script>
+</body>
+</html>
