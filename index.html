@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Countdown Timer</title>  
+  <title>Tip Calculator</title>  
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Saira+Extra+Condensed:wght@700;800;900&display=swap">
   <link rel="stylesheet" href="styles.css">
@@ -10,62 +10,68 @@
 <body>
   <div style="height: 90vh" class="d-flex mt-4 justify-content-center align-items-center">
   <div class="container">
-    <h1 class="display-3 text-danger my-4">Countdown New Year Time</h1>    
+    <h1 class="display-3 text-danger my-4">Tip Calculator</h1>    
 
-    <div id="timePlaceholder"></div>
-    
+      <div class="row">
+        <div class="col-md-12">
+          <label>Bill Amount</label>
+          <input type="text" placeholder="Bill Amount" class="form-control" id="billAmount" />
+        </div>
+
+        <div class="col-md-12">
+          <label>Tip Percentage</label>
+          <select class="form-control" id="percent" onchange="percentage()">
+            <option value="5">5%</option>
+            <option value="10">10%</option>
+            <option value="15">15%</option>
+            <option value="25">25%</option>
+            <option value="other">Other</option>
+            </select>
+            <input type="number" placeholder="Other Percent" class="form-control"  id="otherPercent" />
+        </div>
+
+        <div class="col-md-12">
+          <label>No. of Persons</label>
+          <input type="number" placeholder="No. of Persons" class="form-control"  id="noPersons" />
+        </div>
+
+        <div class="col-md-12 text-center">
+          <input type="button" class="btn btn-danger" value="Calculate" onclick="calculate()" />
+        </div>      
+        
+        <div class="col-md-12">
+          <div id="result" class="text-danger text-center"></div>
+        </div>
+      </div>
+   </div>   
   <script>
-    const countDown = () => {
-      let remainingDays, remainingHours, remainingMinutes, remainingSeconds, eventTime, currentTime, differenceTime;
+    let otherPercent = document.getElementById("otherPercent");
+    otherPercent.style.display = "none";
 
-      eventTime = new Date('December 31, 2020 11:59:59').getTime();      
+    const percentage = () => {      
+      percent = document.getElementById("percent").value;
 
-      currentTime = new Date().getTime();      
-
-      differenceTime = eventTime - currentTime;      
-
-      remainingDays = Math.floor(differenceTime / (1000 * 60 * 60 * 24));      
-
-      remainingHours = Math.floor((differenceTime % (1000 * 60 * 60 * 24)) / ( 1000 * 60 * 60 ));      
-
-      remainingMinutes = Math.floor((differenceTime % (1000 * 60 * 60)) / ( 1000 * 60 ));      
-
-      remainingSeconds = Math.floor((differenceTime % (1000 * 60)) / 1000);
-
-      return document.getElementById('timePlaceholder').innerHTML = 
-        `<div class="card-deck mb-4">
-          <div class="card">        
-            <div class="card-body">
-              <h1 class="card-title">${remainingDays}</h1>
-              <p class="card-text">Days</p>          
-            </div>
-          </div>
-
-          <div class="card">        
-            <div class="card-body">
-              <h1 class="card-title">${remainingHours < 10 ? '0' + remainingHours : remainingHours}</h1>
-              <p class="card-text">Hours</p>          
-            </div>
-          </div>
-
-          <div class="card">        
-            <div class="card-body">
-              <h1 class="card-title">${remainingMinutes < 10 ? '0' + remainingMinutes : remainingMinutes}</h1>
-              <p class="card-text">Minutes</p>          
-            </div>
-          </div>
-
-          <div class="card">        
-            <div class="card-body">
-              <h1 class="card-title">${remainingSeconds < 10 ? '0' + remainingSeconds : remainingSeconds}</h1>
-              <p class="card-text">Seconds</p>          
-            </div>
-          </div>
-        </div>        
-        `
+      if(percent === "other"){
+        otherPercent.style.display = "block";
+        percent = document.getElementById("otherPercent").value;
+      } else{
+        percent = document.getElementById("percent").value;
+      }      
+      return percent;
     }
 
-    setInterval(countDown, 1000);
+    const calculate = () => {
+      let billAmount = Number(document.getElementById("billAmount").value);  
+      let noPersons = document.getElementById("noPersons").value;  
+
+      let tipAmount = billAmount * (percentage() / 100);
+      let totalAmount = billAmount + tipAmount;
+      let shareAmount = totalAmount / noPersons;
+
+      let result = document.getElementById("result");
+      result.innerHTML = `Total Amount including Tip is = ${totalAmount}
+                          Each Person Share Amount is = ${shareAmount}`;
+    }
   </script>
 </body>
 </html>

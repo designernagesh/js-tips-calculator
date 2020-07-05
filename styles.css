@@ -10,6 +10,6 @@ h1, .card{
   font-family: 'Saira Extra Condensed', sans-serif;
   text-align: center;
 }
-.card p{
-  font-size: 21px;
+label{
+	font-weight: bold
 }
