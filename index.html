@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
   <meta charset="UTF-8">
-  <title>Javascript: Percentage Calculate</title>
+  <title>Javascript: Tips Calculator</title>  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Bootstrap CSS -->
@@ -12,34 +12,52 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Saira+Extra+Condensed:wght@700;800;900&display=swap">
   <link href="https://fonts.googleapis.com/css2?family=Yellowtail&display=swap" rel="stylesheet">
 
-  <!-- Font Awsome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
   <!-- Custom CSS Styles -->
   <link rel="stylesheet" href="styles.css">
 </head>
-  <body>
-    <div class="wrapper">    
-      <div class="container text-center d-flex justify-content-center align-items-center flex-column">
-        <h1 class="display-3 text-center text-danger">
-          Percentage Calculate
-        </h1>
-        <p class="lead text-center mb-4">X is what percentage(%) of Y 🙂?</p>
-        
-        <div class="text-center jumbotron form-inline d-flex justify-content-center flex-column mt-4">
-          <form class="formPercentage">
-            <div class="inputFields">
-              <input type="text" id="firstInput" class="form-control form-control-lg" placeholder="'X' Value" />
-              <strong class="px-4">is what percentage(%) of</strong>
-              <input type="text" id="secondInput" class="form-control form-control-lg" placeholder="'Y' Value" />
-            </div>
-            <input type="submit" class="btn btn-danger mt-4 mb-2" value="Calculate the Percentage">            
-          </form>
-          <div class="answer"> </div>
+<body>
+  <div style="height: 90vh" class="d-flex mt-4 justify-content-center align-items-center">
+  <div class="container">
+    <h1 class="display-3 text-danger">Tips Calculator</h1>
+    <p class="lead text-center mb-5">Fill the Amount, No. of Persons, select the Percentage(%) annd Calculate 🙂?</p>
+
+      <div class="row">
+
+        <div class="col-md-12">
+          <div class="result" class="text-danger text-center"></div>
         </div>
 
+      <form class="tipCalculateForm">
+        <div class="col-md-12 mb-4">
+          <label>Bill Amount</label>
+          <input type="text" placeholder="Bill Amount" class="form-control" id="billAmount" />
+        </div>
+
+        <div class="col-md-12 mb-4">
+          <label>Tip Percentage</label>
+          <select class="form-control" id="percent" onclick="selectPercent()">
+            <option value="">Select</option>
+            <option value="5">5%</option>
+            <option value="10">10%</option>
+            <option value="15">15%</option>
+            <option value="25">25%</option>
+            <option value="other">Other</option>
+            </select>
+            <input type="number" placeholder="Other Percent" class="form-control"  id="otherPercent" />            
+        </div>
+
+        <div class="col-md-12 mb-4">
+          <label>No. of Persons</label>
+          <input type="number" placeholder="No. of Persons" class="form-control"  id="noPersons" />
+        </div>
+
+        <div class="col-md-12 text-center">
+          <input type="submit" class="btn btn-danger" value="Calculate Tip" />
+        </div>  
+      </form>
+
       </div>
-    </div>
-    <script src="script.js"></script>
-  </body>
+   </div>
+  <script src="script.js"></script>
+</body>
 </html>

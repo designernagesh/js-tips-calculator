@@ -39,18 +39,17 @@ p.lead::after{
   transform: translate(-50%);
   left: 50%;
 }
-.jumbotron{
+form{
   width: 100%;
 }
-.answer{
-  font-size: 24px;   
-  margin-top: 20px;
-  font-weight: 300;
+label{
+  font-weight: bold;
 }
-.answer span{
+.result{
+  text-align: center;
   font-weight: 600;
+  color: var(--primary-color);
 }
-
 /*/////////////////////////////////////////////////////////////
   [ Responsive CSS Starts Here ]
 */

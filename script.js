@@ -1,19 +1,40 @@
-let formPercentage = document.querySelector(".formPercentage"),
-    firstInput = document.getElementById("firstInput"),
-    secondInput = document.getElementById("secondInput");
+let tipCalculateForm = document.querySelector('.tipCalculateForm'),    
+    otherPercent = document.getElementById("otherPercent");        
+    otherPercent.style.display = "none";
 
-formPercentage.addEventListener('submit', (event) => {
-    event.preventDefault();
-    
-    let firstInputValue = parseFloat(firstInput.value);
-    let secondInputValue = parseFloat(secondInput.value);
-    if(firstInputValue && secondInputValue){
-        let answer = (firstInputValue/secondInputValue * 100).toFixed(2);
-        document.querySelector(".answer").innerHTML = `Answer: <span>${firstInputValue}</span> is the <span>${answer}</span> % of <span>${secondInputValue}</span>`;
+let selectPercent = () => {
+    percent = document.getElementById("percent").value;
+
+    if(percent === "other"){        
+        otherPercent.style.display = "block";
+        percent = document.getElementById("otherPercent").value;
+    } else{
+        percent = document.getElementById("percent").value;
+    }
+    return percent;
+}
+
+const calculate = e => {    
+    e.preventDefault();    
+    let billAmount = Number(document.getElementById("billAmount").value);    
+    let noPersons = document.getElementById("noPersons").value;
+    let result = document.querySelector(".result");
+
+    if(billAmount && noPersons){    
+        let tipAmount = billAmount * (selectPercent() / 100);
+        let totalAmount = billAmount + tipAmount;
+        let shareAmount = (totalAmount / noPersons).toFixed(2);
+
+        result.innerHTML = `Total Amount including Tip is = ${totalAmount} <br />
+                            Each Person Share Amount is = ${shareAmount}`;
     }
     else{
-        alert("Fill the Fields");
+        result.innerHTML = `Please, fill all the fileds and Calculate.`
     }
-    firstInput.value = "";
-    secondInput.value = "";
-})    
+    document.getElementById("billAmount").value = '';
+    document.getElementById("noPersons").value = '';
+    document.getElementById("percent").value = '';
+    otherPercent.style.display = "none";
+}
+
+tipCalculateForm.addEventListener('submit', calculate);
