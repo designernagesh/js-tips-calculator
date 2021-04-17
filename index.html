@@ -1,77 +1,45 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Tips Calculator</title>  
+  <title>Javascript: Percentage Calculate</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" />
+
+  <!-- Google Fonts -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Saira+Extra+Condensed:wght@700;800;900&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Yellowtail&display=swap" rel="stylesheet">
+
+  <!-- Font Awsome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+  <!-- Custom CSS Styles -->
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-  <div style="height: 90vh" class="d-flex mt-4 justify-content-center align-items-center">
-  <div class="container">
-    <h1 class="display-3 text-danger my-4">Tips Calculator</h1>    
-
-      <div class="row">
-        <div class="col-md-12">
-          <label>Bill Amount</label>
-          <input type="text" placeholder="Bill Amount" class="form-control" id="billAmount" />
-        </div>
-
-        <div class="col-md-12">
-          <label>Tip Percentage</label>
-          <select class="form-control" id="percent" onchange="percentage()">
-            <option value="5">5%</option>
-            <option value="10">10%</option>
-            <option value="15">15%</option>
-            <option value="25">25%</option>
-            <option value="other">Other</option>
-            </select>
-            <input type="number" placeholder="Other Percent" class="form-control"  id="otherPercent" />
-        </div>
-
-        <div class="col-md-12">
-          <label>No. of Persons</label>
-          <input type="number" placeholder="No. of Persons" class="form-control"  id="noPersons" />
-        </div>
-
-        <div class="col-md-12 text-center">
-          <input type="button" class="btn btn-danger" value="Calculate" onclick="calculate()" />
-        </div>      
+  <body>
+    <div class="wrapper">    
+      <div class="container text-center d-flex justify-content-center align-items-center flex-column">
+        <h1 class="display-3 text-center text-danger">
+          Percentage Calculate
+        </h1>
+        <p class="lead text-center mb-4">X is what percentage(%) of Y 🙂?</p>
         
-        <div class="col-md-12">
-          <div id="result" class="text-danger text-center"></div>
+        <div class="text-center jumbotron form-inline d-flex justify-content-center flex-column mt-4">
+          <form class="formPercentage">
+            <div class="inputFields">
+              <input type="text" id="firstInput" class="form-control form-control-lg" placeholder="'X' Value" />
+              <strong class="px-4">is what percentage(%) of</strong>
+              <input type="text" id="secondInput" class="form-control form-control-lg" placeholder="'Y' Value" />
+            </div>
+            <input type="submit" class="btn btn-danger mt-4 mb-2" value="Calculate the Percentage">            
+          </form>
+          <div class="answer"> </div>
         </div>
+
       </div>
-   </div>   
-  <script>
-    let otherPercent = document.getElementById("otherPercent");
-    otherPercent.style.display = "none";
-
-    const percentage = () => {      
-      percent = document.getElementById("percent").value;
-
-      if(percent === "other"){
-        otherPercent.style.display = "block";
-        percent = document.getElementById("otherPercent").value;
-      } else{
-        percent = document.getElementById("percent").value;
-      }      
-      return percent;
-    }
-
-    const calculate = () => {
-      let billAmount = Number(document.getElementById("billAmount").value);  
-      let noPersons = document.getElementById("noPersons").value;  
-
-      let tipAmount = billAmount * (percentage() / 100);
-      let totalAmount = billAmount + tipAmount;
-      let shareAmount = totalAmount / noPersons;
-
-      let result = document.getElementById("result");
-      result.innerHTML = `Total Amount including Tip is = ${totalAmount}
-                          Each Person Share Amount is = ${shareAmount}`;
-    }
-  </script>
-</body>
+    </div>
+    <script src="script.js"></script>
+  </body>
 </html>
